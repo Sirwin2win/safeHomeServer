@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 exports.register = async (req, res) => {
-  const { name,phone, email, password } = req.body;
+  const { name,phone, email, password, role } = req.body;
 
   try {
     const existingUser = await User.findByEmail(email);
@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userId = await User.createUser(name, phone, email, hashedPassword);
+    const userId = await User.createUser(name, phone, email, hashedPassword, role);
 
     res.json({ message: 'User registered', userId });
   } catch (err) {
@@ -84,5 +84,22 @@ exports.changePassword = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// Update name,and phone
+exports.updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const result = await userModel.updateUser(userId, req.body);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'User updated successfully' });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
