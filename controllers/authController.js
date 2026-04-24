@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const db = require('../config/db');
 
+//Register Logic
 exports.register = async (req, res) => {
   const { name,phone, email, password, role } = req.body;
 
@@ -20,6 +22,7 @@ exports.register = async (req, res) => {
   }
 };
 
+//Login Logic
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -42,6 +45,7 @@ exports.login = async (req, res) => {
   }
 };
 
+//Password Change Logic
 exports.changePassword = async (req, res) => {
   const userId = req.user.id; // from JWT middleware
   const { currentPassword, newPassword, confirmPassword } = req.body;

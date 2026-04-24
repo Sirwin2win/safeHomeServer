@@ -8,11 +8,4 @@ router.post('/login', authController.login);
 router.post('/change-password', authMiddleware, authController.changePassword);
 router.put('/users/:id', authController.updateUser);
 
-
-
-// Protected route
-router.get('/profile', authMiddleware, (req, res) => {
-  res.json({ message: 'Protected route', user: req.user });
-});
-
 module.exports = router;
