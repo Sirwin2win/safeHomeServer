@@ -6,6 +6,10 @@ const db = require('../config/db');
 //Register Logic
 exports.register = async (req, res) => {
   const { name,phone, email, password, role } = req.body;
+  // ensure all fields are filled by the user
+  if(!name || !phone || !email || !password || !role){
+    res.send("All fields are required")
+  }
 
   try {
     const existingUser = await User.findByEmail(email);
