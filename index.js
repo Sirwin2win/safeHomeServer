@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const maintenanceCategoryRoutes = require('./routes/maintenanceCategoryRoutes');
+const cors = require('cors')
 
 
 const path = require('path');
