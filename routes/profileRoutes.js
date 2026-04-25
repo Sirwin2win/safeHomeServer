@@ -4,12 +4,12 @@ const upload = require('../middleware/upload');
 const profileController = require('../controllers/profileController');
 
 router.post(
-  '/profile',upload.single('profile_picture'),profileController.createOrUpdateProfile
+  '/',upload.single('image'),profileController.createOrUpdateProfile
 );
 
 // Delete profile image
 router.delete(
-  '/profile/:userId',profileController.deleteProfileImage
+  '/:userId',profileController.deleteProfileImage
 );
 
 module.exports = router;

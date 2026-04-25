@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 exports.createProfile = async (userId, imagePath) => {
   const sql = `
-    INSERT INTO profile (user_id, profile_picture)
+    INSERT INTO profile (userId, image)
     VALUES (?, ?)
   `;
 
